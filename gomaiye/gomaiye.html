@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选购页</title>
+   <link rel="stylesheet" href="gomaiye.css">
+   <link rel="stylesheet" href="../css/iconfont.css">
+   <script src = "../jquery/jquery1.12.4.min.js"></script>
+</head>
+<body>
+    <div class = daohang2 id = 'zhong'>  
+        <h1><a href="https://www.prada.com/cn/zh.html">PRADA</a></h1> 
+     <ul class = 'ul1'>
+         <li><a href="#">女士</a>
+           <!--  <div class = 'daohang2_li_wenben'></div> -->
+        </li>
+         <li><a href="#">男士</a></li>
+         <li><a href="#">HALIDAY GIFTS</a></li>
+         <li><a href="#">PRADA SPHERE</a></li>
+     </ul>
+       <div class = 'daohang2_li_wenben'></div>
+       <div class = 'right'>
+        <ul>
+            <!-- <li class = 'li1'><a href="#" >中国大陆/简体中文</a><div class = 'div1'></div></li>  -->
+            <li class = 'li2'><a href="#" class='iconfont icon-3'></a><div class = 'div2'></div></li>
+            <li class = 'li2'><a href="#" class='iconfont icon-lianxiren'></a><div class = 'div2'></div></li>
+            <li class = 'li2'><a href="#" class="iconfont icon-aixin"></a><div class = 'div2'></div></li>
+            <li class = 'li2'><a href="../gowuche/gowuche.html" class="iconfont icon-gouwudai"><div class = 'div2'></div><div class = 'div3'>1</div></a></li>
+            <li class = 'li2'><a href="#" class='iconfont icon-sousuo'></a><div class = 'div2'></div></li>
+        </ul>          
+      </div> 
+    </div> 
+   
+    <div class = 'header_1'>
+        <img src="../images/20.png" alt="">
+    </div>
+    <div class = 'list'>
+        <ul class = 'u_1'>
+            <li class= 'li_1'>类别<p class='iconfont icon-xiangxia' id = 'p_click'></p>
+              <ul class = 'daohan_1'>
+                  <li><a href="#">托特包</a></li>
+                  <li><a href="#">邮差包</a></li>
+                  <li><a href="#">背包</a></li>
+                  <li><a href="#">腰包</a></li>
+                  <li><a href="#">公文包</a></li>
+                  <li><a href="#">手包</a></li>
+                  <li><a href="#">当季精选包</a></li>
+                  <li><a href="#">尼龙再生包</a></li>
+              </ul> 
+            </li>
+            <li class= 'li_1'>系列<p class='iconfont icon-xiangxia'></p></li>
+            <li class= 'li_1'>尺寸<p class='iconfont icon-xiangxia'></p></li>
+            <li class= 'li_1'>材质<p class='iconfont icon-xiangxia'></p></li>
+            <li class= 'li_1'>颜色<p class='iconfont icon-xiangxia'></p></li>
+        </ul>
+    </div>
+<div class = inner_1>
+    <div class = "tanchuang">
+        <h2>加入购物车成功</h2>
+    </div>
+   <!-- <div class = 'i_box_1'>
+        <div class = 'img_1'>           
+            <a href="../xianqingye/xianqingye.html" class = 'iconfont icon-aixin a_1'></a>
+            <a href="../gowuche/gowuche.html" class = 'iconfont icon-gouwudai a_2'></a>
+            <img src="../images/11.png" alt="">
+        </div>
+       
+        <span>3款颜色</span>
+        <p> <a href="../xianqingye/xianqingye.html">Re-loien再生尼龙和sifffaon皮革单肩包</a></p>
+        <p>￥11，000</p>
+    </div>-->
+
+</div>
+</body>
+
+<script>
+  
+    $('#p_click').click(function(){
+        $('.daohan_1').slideToggle()
+    })
+   
+    var get_1 = async function(){
+       var data = await $.ajax({
+           url:'./prada.bag.json' ,
+           type:'get',
+       })  
+       //console.log(data)
+      $.each (data,function(index,item){
+           $(`  <div class = 'i_box_1'>
+        <div class = 'img_1'>          
+            <a href="../xianqingye/xianqingye.html" class = 'iconfont icon-aixin a_1'></a>
+            <h6 class = 'iconfont icon-gouwudai a_2' id = "jion"></h6>
+            <img src="${item.图片}" alt="">
+        </div>
+        <h4 style = "display:none" class = "h4_1">${item.id}</h4>
+        <span>${item.productqb__color}</span>
+        <p title = ${item.标题}><a href="../xianqingye/xianqingye.html" id = "name">${item.标题}</a></p>
+        <p class = 'price_1'>${item.价格}</p>
+    </div> `).appendTo($('.inner_1'));
+       })    
+}
+  get_1();
+  var num = 0 ;
+ $('.inner_1').on('click','#jion',async function(){    
+     var data = await $.ajax({
+          url:"http://localhost/xianmu/prada/gowuche/model/add.php",
+          type:'get' ,
+          data:{
+              id:$(this).parent().siblings('.h4_1').html(),
+              name:$(this).parent().siblings('p').children().html(),
+              price:$(this).parent().siblings('.price_1').html(),
+              num: 1,
+              img:$(this).next().attr('src'),
+          },
+          dataType:'json' ,     
+      }) 
+      num ++   
+      if(data.code == 1){
+        $('.tanchuang').fadeIn(500)
+        setTimeout(() => {
+            $('.tanchuang').fadeOut(500)
+        }, 800);        
+      }
+      if(data.code == 1){
+          $('.div3').css({"display":"block"}).html(num)
+      }  
+  })
+
+ 
+
+</script>
+</html>

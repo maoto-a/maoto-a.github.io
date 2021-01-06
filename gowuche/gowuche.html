@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <link rel="stylesheet" href="gowuche.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <script src = '../jquery/jquery1.12.4.min.js'></script>
+</head>
+<body>
+    
+    <div class = daohang2>  
+        <h1><a href="https://www.prada.com/cn/zh.html">PRADA</a></h1> 
+     <ul class = 'ul1'>
+         <li><a href="../gomaiye/gomaiye.html">女士</a>
+           <!--  <div class = 'daohang2_li_wenben'></div> -->
+        </li>
+         <li><a href="../gomaiye/gomaiye.html">男士</a></li>
+         <li><a href="../gomaiye/gomaiye.html">HALIDAY GIFTS</a></li>
+         <li><a href="../gomaiye/gomaiye.html">PRADA SPHERE</a></li>
+     </ul>
+       <div class = 'daohang2_li_wenben'></div>
+      <!--  <div class = 'right'>
+        <ul>
+            <li class = 'li1'><a href="#" >中国大陆/简体中文</a><div class = 'div1'></div></li>
+            <li class = 'li2'><a href="#" class='iconfont icon-3'></a><div class = 'div2'></div></li>
+            <li class = 'li2'><a href="#" class='iconfont icon-lianxiren'></a><div class = 'div2'></div></li>
+            <li class = 'li2'><a href="#" class="iconfont icon-aixin"></a><div class = 'div2'></div></li>
+            <li class = 'li2'><a href="#" class="iconfont icon-gouwudai"><div class = 'div2'></div></a></li>
+            <li class = 'li2'><a href="#" class='iconfont icon-sousuo'></a><div class = 'div2'></div></li>
+        </ul>          
+      </div>  -->
+    </div> 
+   
+    <div class = 'inner'>
+        <h2>购物袋</h2>
+        <h3>购物袋空空如也</h3>
+        <div class = 'inner_a'>
+       <!--  <div class = 'inner_1'>
+            <div class = 'img_1'>
+                <img src="../images/28.png" alt="">
+            </div>
+            <p>Re-Nylon再生尼龙和Saffiano皮革托特包</p>
+            <p class = 'p_1'>￥<strong class = 's_1'>14500</strong></p>
+            <span>2VG860_ 2DMH_ F0002_ _V_ 000 </span>
+            <span>颜色：黑色</span>
+            <a href="#" class = 'a_1'>移除商品</a>
+            <a href="#" class = 'a_2'>编辑</a>
+             <a href="#" class = 'a_3'>加购同款</a> 
+            <div class = 'kuang'>
+                数量 :
+                <a href="#" class = 'jianhao'>-<a>
+                <div class = 'num_1'>1</div>
+                <a href="#" class = 'jiahao'>＋</a>
+                <p class = 'i_2'>最多购买4件</p>
+            </div>
+        </div> -->
+    </div>
+        <div class = 'inner_2'>
+           <div class = 'inner_2_a'>
+               <h3 style = "display:none;">000001</h3>
+               <p>总计</p><span>（<a href="#">1</a>件商品）</span>
+               <p class = 'p_2'>￥<strong class = 's_2'>14500</strong></p>
+              <a href="#" class = 'pay_1'>进入结算中心</a>              
+           </div> 
+           <div class = 'inner_2_b'>
+               <img src="../images/27.png" alt="">
+           </div>
+        </div>
+        <!-- <div class = 'inner_1'></div> -->
+    </div> 
+    <div class = 'end'>
+        <!-- <img src="../images/timg.gif" alt=""> -->
+       
+    </div>   
+</body>
+<script>
+    var inner = document.querySelector('.inner');
+    var num_1 = document.querySelector('.num_1') ;
+    var jia = document.querySelector('.jiahao') ;
+    var jian = document.querySelector('.jianhao') ;
+    var i_2 = document.querySelector('.i_2') ;
+    var price = document.querySelector('.s_1') ;
+   // var num_3 = Number( price.innerHTML); 
+    // var num_2 = 1 ;
+    // var add_1 = document.querySelector('.a_3');
+    var del_1 = document.querySelector('.a_1');
+    var pay_1 = document.querySelector('.pay_1') ;
+    var end = document.querySelector('.end') ;
+    var a = 4 ;
+    showData()
+   async function showData(){
+       var data = await $.ajax({
+           url :"http://localhost/xianmu/prada/gowuche/model/showlist.php",
+           dataType:'json',
+           success:function(res){            
+               if(res.code === 1){
+               // console.log(res)
+                   $('h3').hide();
+                   $('.inner_a').empty;
+                   var list = res.data;
+                   if(list.length<1){
+                    $('h3').show();
+                   $('.inner_a').hide(); 
+                   return;  
+                   }
+                   $.each(list,function(index,product){
+                    ($('.inner_a')).append(` <div class = 'inner_1'>
+            <div class = 'img_1'>
+                <img src="${product.product_img}" alt="">
+            </div>
+            <p>${product.product_name}</p>
+            <p class = 'p_1'>￥<strong class = 's_1'>${product.product_price}</strong></p>
+            <span>2VG860_ 2DMH_ F0002_ _V_ 000 </span>
+            <span>颜色：黑色</span>
+            <a href="#" class = 'a_1'>移除商品</a>
+            <a href="#" class = 'a_2'>编辑</a>
+            <!-- <a href="#" class = 'a_3'>加购同款</a> -->
+            <div class = 'kuang'>
+                数量 :
+                <a  class = 'jianhao'>-<a>
+                <a href="#" class = 'num_1'>${product.product_num}</a>
+                <a href="#" class = 'jiahao'>＋</a>
+                <h4 style = 'display:none' class = 'h4_1'>${product.product_id}</h4>
+                <p class = 'i_2'>最多购买4件</p>               
+            </div>
+        </div>`)
+                   })
+                   
+               }else{
+                $('h3').show();
+                   $('.inner_a').hide(); 
+               }
+           }
+       })
+    }
+    $('.inner').on('click','.jiahao',function(){
+     $.ajax({
+         url:"http://localhost/xianmu/prada/gowuche/model/update.php",
+         data:{
+             type:"add",
+             id:$(this).next().html(),
+         },
+         dataType:'json',
+         success:function(res){
+           if(res.code == 1) {             
+               console.log(this);
+          // $(this).prve().html(parseInt($(this).prve().html())+1);
+           $('.num_1').html(parseInt($('.num_1').html())+1);
+           } 
+         }
+     })
+    })
+    $('.inner').on('click','.jianhao',function(){
+        $.ajax({
+         url:"http://localhost/xianmu/prada/gowuche/model/update.php",
+         data:{
+             type:"cut",
+             id:$(this).siblings('.h4_1').html(),
+         },
+         dataType:'json',
+         success:function(res){
+           if(res.code == 1) {
+          // $(this).prve().html(parseInt($(this).prve().html())+1);
+           var num_2 = $('.num_1').html(parseInt($('.num_1').html())-1);
+            $(this).parent().siblings('.p_1').children()
+            .html(parseInt( $(this).parent().siblings('.p_1').children()
+            .html())*num_2)
+           } 
+         }
+     })
+    })
+    
+ /*  $('.inner').on('click','.jiahao',function(){
+    var e = e || window.event ;
+        // console.log(num_2)
+        if(num_2 >= 3){                       
+            i_2.style.display = 'block' ;          
+        }
+        num_2 ++ ;
+        num_1.innerHTML = num_2 ;            
+        num_5 = num_3 * num_2 ;   
+        //console.log(num_3) ;
+       price.innerHTML = num_5 ;      
+    }
+    // price.innerHTML = num_3 ;      
+  ),
+  $('inner').on('click','.jianhao',function(){
+    var e = e || window.event ;       
+        // console.log(num_2)
+       if(!(num_2 <= 1)){
+           num_2 -- ;
+           num_1.innerHTML = num_2 ;   
+           num_5 = num_3 * num_2 ;   
+           price.innerHTML = num_5 ;           
+       }     
+        if(num_2 < 4){
+            i_2.style.display = 'none' ;  
+        }          
+  })
+  
+    del_1.onclick = function(e){
+        var e = e || window.event ;
+        document.querySelector('.inner_1').remove() ;
+    }
+    pay_1.onclick = function(e){
+        end.style.top = 0 ;
+        var e = e || window.event ;
+         var canvas = document.createElement("canvas");
+         // 设置大小和颜色
+         canvas.width = window.innerWidth ;
+         canvas.height = window.innerHeight ;
+         canvas.style.backgroundColor = "#333333";
+         // 将画布放置到body里
+         end.appendChild(canvas);
+         // 得到画笔
+         var context = canvas.getContext("2d");
+         // 定义一个存放所有粒子的数组
+         var particles = [ ];
+// 调用显示粒子
+         showParticle();
+         // 创建并显示粒子的方法
+         function showParticle(){
+             // 循环操作
+             setInterval(function(){
+                 // 清空画布
+                 context.clearRect(0,0,canvas.width, canvas.height);
+                 // 创建粒子
+                 var p = new Particle(canvas.width * 0.5 , canvas.height * 0.5);
+                 // 将粒子装入存放粒子的数组
+                 particles.push(p);
+                 // 循环更新所有粒子的位置
+                 for (var i = 0;i<particles.length;i++) {
+                     // 更新位置
+                     particles[i].updateData();
+                 }
+             }, 50);
+         }
+function Particle(x, y){
+             // 原坐标
+             this.x = x;
+             this.y = y;
+             // 初始出现的改变的y的值
+             this.yVal = -5 ;
+             // 改变的x的值
+             this.xVal = Math.random() * 8 - 4;
+             // 定义一个下降的重力加速度
+             this.g = 0.1;
+             // 更新位置
+             this.updateData = function(){
+                 // X值的变化
+                 this.x = this.x + this.xVal;
+                 // Y值的变化
+                 this.y = this.y + this.yVal;
+                 // 每次改变Y值速度的变化
+                 this.yVal = this.yVal + this.g;
+                 // 生成一个随机颜色
+                 context.fillStyle = "#" + Math.floor(Math.random() * 0xffffff).toString(16);
+                 // 将更新位置后的圆绘制出来
+                 this.draw();
+             };
+// 绘图的方法
+             this.draw = function(){
+                 // 开始画图
+                 context.beginPath();
+                 // 画圆
+                 context.arc(this.x, this.y,5,0,Math.PI * 2, false);
+                 // 结束画图
+                 context.closePath();
+                 // 填充
+                 context.fill();
+             };
+         } 
+    }
+   */
+  
+        
+        
+    
+
+ 
+</script>
+</html>

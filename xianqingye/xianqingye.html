@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详情页</title>
+    <link rel="stylesheet" href="xianqingye.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+</head>
+<body>
+    <div class = daohang2>  
+        <h1><a href="https://www.prada.com/cn/zh.html">PRADA</a></h1> 
+     <ul class = 'ul1'>
+         <li><a href="./gomaiye/gomaiye.html">女士</a>
+           <!--  <div class = 'daohang2_li_wenben'></div> -->
+        </li>
+         <li><a href="./gomaiye/gomaiye.html">男士</a></li>
+         <li><a href="./gomaiye/gomaiye.html">HALIDAY GIFTS</a></li>
+         <li><a href="./gomaiye/gomaiye.html">PRADA SPHERE</a></li>
+     </ul>
+       <div class = 'daohang2_li_wenben'></div>
+    </div> 
+    <div class = 'right'>
+        <ul>
+            <li class = 'li1'><a href="#" >中国大陆/简体中文</a><div class = 'div1'></div></li>
+            <li class = 'li2'><a href="#" class='iconfont icon-3'></a><div class = 'div2'></div></li>
+            <li class = 'li2'><a href="#" class='iconfont icon-lianxiren'></a><div class = 'div2'></div></li>
+            <li class = 'li2'><a href="#" class="iconfont icon-aixin"></a><div class = 'div2'></div></li>
+            <li class = 'li2'><a href="#" class="iconfont icon-gouwudai"><div class = 'div2'></div></a></li>
+            <li class = 'li2'><a href="#" class='iconfont icon-sousuo'></a><div class = 'div2'></div></li>
+        </ul>          
+      </div> 
+    <div class = 'dengru'>
+        <div class = 'inner_2'>
+            <div class = 'i_3'>
+                <h2>登录</h2>
+                <p>登录个人账户，更快查询订单详情以及历史订单，井管理您的个人账户信息，购
+                    物装商品和心配洁单。
+                    </p>
+              <input type="text" class = 'input_1' value = '+86'>
+              <input type="text" class = 'input_2' value = '手机号码'>
+              <input type="text" class = 'input_3' value = '密码'>
+             <input type="checkbox" class = 'input_4' value = ''>
+             <input type="submit" name="" value = '登录' class = 'input_5'>
+            </div>
+            <div class  = 'cuohao'><a href="#" class = 'iconfont icon-cuo'></a></div>
+            <div class = 'biaoqian'>
+                <h2>您是否尚未注册？</h2>
+                <div class = 's_1'>
+                    <span>创建新的账户</span>
+                    <a href="#">创建新的账户</a>
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = 'inner_1'>
+        <div class = 'xianqing'>
+        <h2>Re-loien再生尼龙和sifffaon皮革单肩包</h2>
+        <p>这款托特包采用创新性Re-Nylon再生尼龙织物打造，简约的设计引人注目。精美的Saffano皮 革饰边勾勒
+            紧凑的廊形线条。可拆卸肩带、多个内部和...<a>查看商品详情</a>
+            </p>
+        <span>￥ 11,000</span></br>
+        <input type="text" value = '&nbsp;&nbsp;黑色'>
+        <input type="text" value = '&nbsp;&nbsp;均码'>
+        <div class = 'jingping'>
+            精品店查找         
+            <a href="#"> <p>精品店查找</p></a>           
+        </div>
+        <div class = 'shop'>
+        <a href="../gowuche/gowuche.html">加入购物袋</a> 
+        </div> 
+        <div class = 'a_1'><a href="#" class = 'iconfont icon-aixin'></a></div> 
+        </div>
+
+        <div id = 'box'>
+            <img src="../images/14.png" alt="">
+            <div class = 'mark'></div>
+        </div>
+        <div class = 'leftbox'>
+            <img src="../images/14.png" alt="">
+        </div>
+        <div class = 'imgs'>
+            <img src="../images/14.png" alt="" class = 'border1'>
+            <img src="../images/15.png" alt="">
+        </div>
+    </div>
+</body>
+<script>
+var box = document.querySelector('#box');
+var boxImg = box.querySelector('img');
+var mark = document.querySelector('.mark');
+var leftBox = document.querySelector('.leftbox');
+var leftImg = leftBox.querySelector('img');
+var footDiv = document.querySelector('.imgs');
+var imgs = footDiv.querySelectorAll('img');
+var a_1 = document.querySelector('.a_1');
+var dengRu = document.querySelector('.dengru');
+var cuo = document.querySelector('.cuohao');
+var inner_2 = document.querySelector('.inner_2');
+// var a_1 = inner_1.querySelector('.a_1');
+/* function move(e){
+    var x1 = e.pageX-box.offsetRight-parseInt(mark.offsetWidth/2);
+    var y1 = e.pageY-box.offsetTop-parseInt(mark.offsetHeight/2);
+    var maxX = box.offsetWidth-mark.offsetWidth;
+    var maxY = box.offsetHeight-mark.offsetHeight;
+    var minX = minY = 0;
+    var tempX,tempY ;
+    if(x1 < minX){
+        mark.style.left = minX + 'px' ;
+        tempX = 0 ;
+    } else if(x1 > maxX){
+        mark.style.right = maxX + 'px' ;
+        tempX = maxX ;
+    } else {
+        mark.style.right = x1 + 'px' ;
+        tempX = x1 ;
+    }
+    if (y1 < minY){
+        mark.style.top = minY + 'px';
+        tempY = 0 ;
+    } else if(y1 > maxY){
+        mark.style.top = maxY + 'px' ;
+    } else {
+        mark.style.top = y1 + 'px' ;
+        tempY = y1 ;
+    }
+    leftImg.style.right = -2*tempX + 'px' ;
+    leftImg.style.top = -2*tempY + 'px' ;
+} */
+box.onmouseover = function(e){
+    var e = e || window.event ;
+    mark.style.display = 'block' ;
+    leftBox.style.display = 'block' ;
+}
+box.onmouseout = function(){
+    mark.style.display = 'none' ;
+    leftBox.style.display = 'none' ;
+}
+box.onmousemove = function(ev){
+    var e = ev || window.event ;
+    // move(e) ;
+    var l = e.clientX - box.offsetLeft - 330 ;
+    var t = e.clientY - box.offsetTop - 205 ;
+    if(l <= 0){
+        l = 0 ;
+    }
+    if(l >= 330){
+        l = 330 ;
+    }
+    if(t <= 0){
+        t = 0 ;
+    }
+    if(t >= 410){
+        t = 410 ;
+    } 
+    mark.style.left = l + 'px' ;
+    mark.style.top = t + 'px' ;
+    leftImg.style.left = l * -2 + 'px' ;
+    leftImg.style.top = t * -2 + 'px' ;
+
+}
+for(var i = 0 ; i < imgs.length ; i++){
+    imgs[i].onclick = function (){
+        for (var a = 0 ;a < imgs.length ; a++){
+            imgs[a].className = '' ;
+        }
+        this.className = 'border1' ;
+        var src1 = this.getAttribute('src') ;
+        boxImg.setAttribute('src' , src1) ;
+        leftImg.setAttribute('src' , src1) ;
+    }
+}
+a_1.onclick = function(){
+    dengRu.style.display = 'block' ;
+    setTimeout(() => {
+        inner_2.style.top = 0 + 'px' ;
+     }, 100);
+ /*  inner_2.style.top = 1 + 'px' ;  */
+}
+cuo.onclick = function(){
+   
+    inner_2.style.top = -600 + 'px' ;
+     setTimeout(() => {
+        dengRu.style.display = 'none' ;
+     }, 550);
+  /*   window.onmouseover = function(e){
+     var e = e || window.event ;
+     dengRu.style.display = 'none' ;
+    } */
+}
+/* dengRu.onmousemove = function(){
+    inner_2.style.top = 0 ;
+} */
+/* inner_2.onmouseover = function(){
+    console.log('我滑入了')
+} */
+</script>
+</html>
