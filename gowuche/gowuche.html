@@ -114,15 +114,16 @@
             <p class = 'p_1'>￥<strong class = 's_1'>${product.product_price}</strong></p>
             <span>2VG860_ 2DMH_ F0002_ _V_ 000 </span>
             <span>颜色：黑色</span>
-            <a href="#" class = 'a_1'>移除商品</a>
+            <a href="#" class = 'a_1'>删除商品</a>
             <a href="#" class = 'a_2'>编辑</a>
+            <h4 style = 'display:none' class = 'h4_1'>${product.product_id}</h4>
             <!-- <a href="#" class = 'a_3'>加购同款</a> -->
             <div class = 'kuang'>
                 数量 :
                 <a  class = 'jianhao'>-<a>
                 <a href="#" class = 'num_1'>${product.product_num}</a>
                 <a href="#" class = 'jiahao'>＋</a>
-                <h4 style = 'display:none' class = 'h4_1'>${product.product_id}</h4>
+               
                 <p class = 'i_2'>最多购买4件</p>               
             </div>
         </div>`)
@@ -134,149 +135,91 @@
                }
            }
        })
-    }
+    };
+    
     $('.inner').on('click','.jiahao',function(){
+        var that = $(this) ;
+        var num_3 = parseInt(that.prev().html());
+        ++num_3;
+       var num_4 = 11000;
+       var num_5 = parseInt(num_3 * num_4)
+     /*  var num_4 = parseInt(that.parent().siblings('.p_1').children('.s_1').html());  
+      var num_5 =  num_4 + num_4 ; 
+      //var num_5 = num_4 + num_4;
+        console.log(num_4) */
      $.ajax({
          url:"http://localhost/xianmu/prada/gowuche/model/update.php",
          data:{
              type:"add",
-             id:$(this).next().html(),
+             id:$(this).parent().siblings('.h4_1').html(),
          },
          dataType:'json',
          success:function(res){
-           if(res.code == 1) {             
-               console.log(this);
-          // $(this).prve().html(parseInt($(this).prve().html())+1);
-           $('.num_1').html(parseInt($('.num_1').html())+1);
+           if(res.code == 1) {  
+               if(num_3 > 3) {
+              that.next().css({
+                  'display':'block'
+              })
+               }         
+          that.prev().html(parseInt( that.prev().html())+1);       
+          that.parent().siblings('.p_1').children('.s_1').html(num_5);
+
            } 
          }
      })
+    
     })
     $('.inner').on('click','.jianhao',function(){
+        var that_1 = $(this);
+        var num_6 = parseInt(that_1.nextAll('.num_1').html());
+        --num_6;
+        var num_9 = 1;
+        var num_7 = 11000;
+        var num_8 = parseInt(num_6 * num_7);
         $.ajax({
          url:"http://localhost/xianmu/prada/gowuche/model/update.php",
          data:{
              type:"cut",
-             id:$(this).siblings('.h4_1').html(),
+             id:$(this).parent().siblings('.h4_1').html(),
          },
          dataType:'json',
          success:function(res){
            if(res.code == 1) {
-          // $(this).prve().html(parseInt($(this).prve().html())+1);
-           var num_2 = $('.num_1').html(parseInt($('.num_1').html())-1);
-            $(this).parent().siblings('.p_1').children()
-            .html(parseInt( $(this).parent().siblings('.p_1').children()
-            .html())*num_2)
+              if(num_6 < 4){
+                  that_1.siblings('.i_2').css({
+                      'display':'none'
+                  })
+              }
+              if((num_6 <= 0)){
+               num_6.html(num_9) ;         
+       }     
+          that_1.nextAll('.num_1').html(parseInt(that_1.nextAll('.num_1').html())-1);
+          that_1.parent().siblings('.p_1').children('.s_1').html(num_8);
            } 
          }
-     })
-    })
-    
- /*  $('.inner').on('click','.jiahao',function(){
-    var e = e || window.event ;
-        // console.log(num_2)
-        if(num_2 >= 3){                       
-            i_2.style.display = 'block' ;          
+     })  
+ })
+ $('.inner').on('click','.a_1',function(){
+    // console.log('我被点击了')
+    var that = $(this) ;
+   // console.log(that)
+    $.ajax({
+        url:"http://localhost/xianmu/prada/gowuche/model/del.php",
+        data:{
+            id:that.nextAll('.h4_1').html()
+        },
+        dataType:'json',
+        success:function(res){
+          if(res.code === 1){
+           that.parent().remove();
+           
+          }
         }
-        num_2 ++ ;
-        num_1.innerHTML = num_2 ;            
-        num_5 = num_3 * num_2 ;   
-        //console.log(num_3) ;
-       price.innerHTML = num_5 ;      
-    }
-    // price.innerHTML = num_3 ;      
-  ),
-  $('inner').on('click','.jianhao',function(){
-    var e = e || window.event ;       
-        // console.log(num_2)
-       if(!(num_2 <= 1)){
-           num_2 -- ;
-           num_1.innerHTML = num_2 ;   
-           num_5 = num_3 * num_2 ;   
-           price.innerHTML = num_5 ;           
-       }     
-        if(num_2 < 4){
-            i_2.style.display = 'none' ;  
-        }          
-  })
-  
-    del_1.onclick = function(e){
-        var e = e || window.event ;
-        document.querySelector('.inner_1').remove() ;
-    }
-    pay_1.onclick = function(e){
-        end.style.top = 0 ;
-        var e = e || window.event ;
-         var canvas = document.createElement("canvas");
-         // 设置大小和颜色
-         canvas.width = window.innerWidth ;
-         canvas.height = window.innerHeight ;
-         canvas.style.backgroundColor = "#333333";
-         // 将画布放置到body里
-         end.appendChild(canvas);
-         // 得到画笔
-         var context = canvas.getContext("2d");
-         // 定义一个存放所有粒子的数组
-         var particles = [ ];
-// 调用显示粒子
-         showParticle();
-         // 创建并显示粒子的方法
-         function showParticle(){
-             // 循环操作
-             setInterval(function(){
-                 // 清空画布
-                 context.clearRect(0,0,canvas.width, canvas.height);
-                 // 创建粒子
-                 var p = new Particle(canvas.width * 0.5 , canvas.height * 0.5);
-                 // 将粒子装入存放粒子的数组
-                 particles.push(p);
-                 // 循环更新所有粒子的位置
-                 for (var i = 0;i<particles.length;i++) {
-                     // 更新位置
-                     particles[i].updateData();
-                 }
-             }, 50);
-         }
-function Particle(x, y){
-             // 原坐标
-             this.x = x;
-             this.y = y;
-             // 初始出现的改变的y的值
-             this.yVal = -5 ;
-             // 改变的x的值
-             this.xVal = Math.random() * 8 - 4;
-             // 定义一个下降的重力加速度
-             this.g = 0.1;
-             // 更新位置
-             this.updateData = function(){
-                 // X值的变化
-                 this.x = this.x + this.xVal;
-                 // Y值的变化
-                 this.y = this.y + this.yVal;
-                 // 每次改变Y值速度的变化
-                 this.yVal = this.yVal + this.g;
-                 // 生成一个随机颜色
-                 context.fillStyle = "#" + Math.floor(Math.random() * 0xffffff).toString(16);
-                 // 将更新位置后的圆绘制出来
-                 this.draw();
-             };
-// 绘图的方法
-             this.draw = function(){
-                 // 开始画图
-                 context.beginPath();
-                 // 画圆
-                 context.arc(this.x, this.y,5,0,Math.PI * 2, false);
-                 // 结束画图
-                 context.closePath();
-                 // 填充
-                 context.fill();
-             };
-         } 
-    }
-   */
-  
-        
-        
+    })
+
+ })
+    
+ 
     
 
  
