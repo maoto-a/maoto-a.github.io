@@ -218,8 +218,77 @@
     })
 
  })
-    
- 
+    $('.pay_1').click(function(e){
+        end.style.top = 0 ;
+        var e = e || window.event ;
+         var canvas = document.createElement("canvas");
+         // 设置大小和颜色
+         canvas.width = window.innerWidth ;
+         canvas.height = window.innerHeight ;
+         canvas.style.backgroundColor = "#333333";
+         // 将画布放置到body里
+         end.appendChild(canvas);
+         // 得到画笔
+         var context = canvas.getContext("2d");
+         // 定义一个存放所有粒子的数组
+         var particles = [ ];
+// 调用显示粒子
+         showParticle();
+         // 创建并显示粒子的方法
+         function showParticle(){
+             // 循环操作
+             setInterval(function(){
+                 // 清空画布
+                 context.clearRect(0,0,canvas.width, canvas.height);
+                 // 创建粒子
+                 var p = new Particle(canvas.width * 0.5 , canvas.height * 0.5);
+                 // 将粒子装入存放粒子的数组
+                 particles.push(p);
+                 // 循环更新所有粒子的位置
+                 for (var i = 0;i<particles.length;i++) {
+                     // 更新位置
+                     particles[i].updateData();
+                 }
+             }, 50);
+         }
+function Particle(x, y){
+             // 原坐标
+             this.x = x;
+             this.y = y;
+             // 初始出现的改变的y的值
+             this.yVal = -5 ;
+             // 改变的x的值
+             this.xVal = Math.random() * 8 - 4;
+             // 定义一个下降的重力加速度
+             this.g = 0.1;
+             // 更新位置
+             this.updateData = function(){
+                 // X值的变化
+                 this.x = this.x + this.xVal;
+                 // Y值的变化
+                 this.y = this.y + this.yVal;
+                 // 每次改变Y值速度的变化
+                 this.yVal = this.yVal + this.g;
+                 // 生成一个随机颜色
+                 context.fillStyle = "#" + Math.floor(Math.random() * 0xffffff).toString(16);
+                 // 将更新位置后的圆绘制出来
+                 this.draw();
+             };
+// 绘图的方法
+             this.draw = function(){
+                 // 开始画图
+                 context.beginPath();
+                 // 画圆
+                 context.arc(this.x, this.y,5,0,Math.PI * 2, false);
+                 // 结束画图
+                 context.closePath();
+                 // 填充
+                 context.fill();
+             };
+         } 
+    })
+
+   
     
 
  
